@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant "Forum Page" as FP
+participant "ForumController" as FC
+database "Forum Table" as FT
+
+User -> FP: 发布新帖子
+FP -> FC: 提交帖子内容
+FC -> FT: 保存帖子数据
+FT --> FC: 确认保存
+FC --> FP: 返回发布结果
+FP --> User: 显示发布状态
+
+User -> FP: 回复帖子
+FP -> FC: 提交回复内容
+FC -> FT: 保存回复数据
+FT --> FC: 确认保存
+FC --> FP: 返回回复结果
+FP --> User: 显示回复状态
+@enduml 

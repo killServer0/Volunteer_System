@@ -1,0 +1,72 @@
+@startuml
+actor Admin
+actor Volunteer
+participant "Volunteer Management Page" as VP
+participant "ZhiyuanzheController" as ZC
+participant "ZhiyuanzheService" as ZS
+participant "ZhihuodongService" as HDS
+participant "ZhihuodongYuyueService" as YS
+database "Database" as DB
+
+== 志愿者注册 ==
+Volunteer -> VP: 提交注册信息
+VP -> ZC: 调用注册接口
+activate ZC
+ZC -> ZS: 验证用户信息
+ZS -> DB: 检查重复信息
+DB --> ZS: 返回检查结果
+ZS --> ZC: 返回验证结果
+ZC -> DB: 保存志愿者信息
+DB --> ZC: 确认保存
+ZC --> VP: 返回注册结果
+VP --> Volunteer: 显示注册状态
+deactivate ZC
+
+== 活动管理 ==
+Admin -> VP: 创建志愿者活动
+VP -> ZC: 调用活动创建接口
+activate ZC
+ZC -> HDS: 创建活动
+HDS -> DB: 保存活动信息
+DB --> HDS: 确认保存
+HDS --> ZC: 返回创建结果
+ZC --> VP: 返回操作结果
+VP --> Admin: 显示创建状态
+deactivate ZC
+
+== 活动报名 ==
+Volunteer -> VP: 报名参加活动
+VP -> ZC: 调用报名接口
+activate ZC
+ZC -> YS: 处理报名请求
+YS -> DB: 保存报名信息
+DB --> YS: 确认保存
+YS --> ZC: 返回报名结果
+ZC --> VP: 返回操作结果
+VP --> Volunteer: 显示报名状态
+deactivate ZC
+
+== 信息管理 ==
+Admin -> VP: 查看志愿者信息
+VP -> ZC: 调用查询接口
+activate ZC
+ZC -> ZS: 获取志愿者数据
+ZS -> DB: 查询志愿者信息
+DB --> ZS: 返回查询结果
+ZS --> ZC: 返回数据
+ZC --> VP: 返回查询结果
+VP --> Admin: 显示志愿者信息
+deactivate ZC
+
+== 密码管理 ==
+Volunteer -> VP: 修改密码
+VP -> ZC: 调用密码修改接口
+activate ZC
+ZC -> ZS: 验证原密码
+ZS -> DB: 更新密码
+DB --> ZS: 确认更新
+ZS --> ZC: 返回更新结果
+ZC --> VP: 返回操作结果
+VP --> Volunteer: 显示修改状态
+deactivate ZC
+@enduml 

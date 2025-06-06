@@ -1,0 +1,39 @@
+# 通用忽略
+node_modules/
+logs/
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# IDE配置
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 后端Java相关
+target/
+out/
+
+# 前端相关（admin-vue3）
+src/main/resources/admin/admin-vue3/node_modules/
+src/main/resources/admin/admin-vue3/dist/
+src/main/resources/admin/admin-vue3/dist-ssr/
+src/main/resources/admin/admin-vue3/*.local
+src/main/resources/admin/admin-vue3/logs/
+src/main/resources/admin/admin-vue3/*.log
+
+# 前端子项目 vite-project
+src/main/resources/admin/admin-vue3/vite-project/node_modules/
+src/main/resources/admin/admin-vue3/vite-project/dist/
+src/main/resources/admin/admin-vue3/vite-project/dist-ssr/
+src/main/resources/admin/admin-vue3/vite-project/*.local
+src/main/resources/admin/admin-vue3/vite-project/logs/
+src/main/resources/admin/admin-vue3/vite-project/*.log
+
+# 其他
+*.bak
+*.old

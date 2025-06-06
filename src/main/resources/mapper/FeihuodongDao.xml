@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.FeihuodongDao">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        a.id as id
+        ,a.feizhiyuan_id as feizhiyuanId
+        ,a.feihuodong_name as feihuodongName
+        ,a.feihuodong_uuid_number as feihuodongUuidNumber
+        ,a.feihuodong_photo as feihuodongPhoto
+        ,a.feihuodong_address as feihuodongAddress
+        ,a.feihuodong_types as feihuodongTypes
+        ,a.feihuodong_kucun_number as feihuodongKucunNumber
+        ,a.feihuodong_tiaojian as feihuodongTiaojian
+        ,a.feihuodong_content as feihuodongContent
+        ,a.feihuodong_delete as feihuodongDelete
+        ,a.insert_time as insertTime
+        ,a.create_time as createTime
+    </sql>
+    <select id="selectListView" resultType="com.entity.view.FeihuodongView">
+        SELECT * FROM feihuodong a
+        <where>
+            <if test="params != null">
+                <if test="params.id != null and params.id != ''">
+                    and a.id = #{params.id}
+                </if>
+                <if test="params.feizhiyuanId != null and params.feizhiyuanId != ''">
+                    and a.feizhiyuan_id = #{params.feizhiyuanId}
+                </if>
+                <if test="params.feihuodongName != null and params.feihuodongName != ''">
+                    and a.feihuodong_name like concat('%',#{params.feihuodongName},'%')
+                </if>
+                <if test="params.feihuodongUuidNumber != null and params.feihuodongUuidNumber != ''">
+                    and a.feihuodong_uuid_number like concat('%',#{params.feihuodongUuidNumber},'%')
+                </if>
+                <if test="params.feihuodongPhoto != null and params.feihuodongPhoto != ''">
+                    and a.feihuodong_photo like concat('%',#{params.feihuodongPhoto},'%')
+                </if>
+                <if test="params.feihuodongAddress != null and params.feihuodongAddress != ''">
+                    and a.feihuodong_address like concat('%',#{params.feihuodongAddress},'%')
+                </if>
+                <if test="params.feihuodongTypes != null and params.feihuodongTypes != ''">
+                    and a.feihuodong_types = #{params.feihuodongTypes}
+                </if>
+                <if test="params.feihuodongKucunNumber != null and params.feihuodongKucunNumber != ''">
+                    and a.feihuodong_kucun_number = #{params.feihuodongKucunNumber}
+                </if>
+                <if test="params.feihuodongTiaojian != null and params.feihuodongTiaojian != ''">
+                    and a.feihuodong_tiaojian like concat('%',#{params.feihuodongTiaojian},'%')
+                </if>
+                <if test="params.feihuodongContent != null and params.feihuodongContent != ''">
+                    and a.feihuodong_content like concat('%',#{params.feihuodongContent},'%')
+                </if>
+                <if test="params.feihuodongDelete != null and params.feihuodongDelete != ''">
+                    and a.feihuodong_delete = #{params.feihuodongDelete}
+                </if>
+                <if test="params.insertTimeStart != null and params.insertTimeStart != ''">
+                    <![CDATA[ and a.insert_time >= #{params.insertTimeStart} ]]>
+                </if>
+                <if test="params.insertTimeEnd != null and params.insertTimeEnd != ''">
+                    <![CDATA[ and a.insert_time <= #{params.insertTimeEnd} ]]>
+                </if>
+                <if test="params.createTimeStart != null and params.createTimeStart != ''">
+                    <![CDATA[ and a.create_time >= #{params.createTimeStart} ]]>
+                </if>
+                <if test="params.createTimeEnd != null and params.createTimeEnd != ''">
+                    <![CDATA[ and a.create_time <= #{params.createTimeEnd} ]]>
+                </if>
+                <!-- 前台只显示已审核的活动 -->
+                <if test="params.isFront != null and params.isFront == true">
+                    and a.huodong_status > 1
+                </if>
+            </if>
+        </where>
+    </select>
+
+</mapper>

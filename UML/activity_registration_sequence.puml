@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "Activity List" as AL
+participant "ZhihuodongYuyueController" as YC
+database "ZhihuodongYuyue Table" as YT
+database "Zhihuodong Table" as ZT
+
+User -> AL: 浏览活动列表
+AL -> ZT: 获取活动信息
+ZT --> AL: 返回活动数据
+User -> AL: 选择活动报名
+AL -> YC: 提交报名信息
+YC -> YT: 保存报名记录
+YT --> YC: 确认保存
+YC -> ZT: 更新活动人数
+ZT --> YC: 确认更新
+YC --> AL: 返回报名结果
+AL --> User: 显示报名状态
+@enduml 

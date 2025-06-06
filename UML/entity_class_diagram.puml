@@ -1,0 +1,186 @@
+@startuml
+!theme plain
+skinparam classAttributeIconSize 0
+skinparam classFontStyle bold
+skinparam classAttributeFontStyle normal
+
+' 用户相关实体
+class Users {
+  -Long id
+  -String username
+  -String password
+  -String role
+  -Timestamp addtime
+}
+
+class Zhiyuanzhe {
+  -Integer id
+  -String username
+  -String password
+  -String zhiyuanzhe_name
+  -String zhiyuanzhe_phone
+  -String zhiyuanzhe_id_number
+  -String zhiyuanzhe_photo
+  -Integer sex_types
+  -String zhiyuanzhe_email
+  -Timestamp create_time
+}
+
+class Feizhiyuan {
+  -Integer id
+  -String username
+  -String password
+  -String feizhiyuan_name
+  -String feizhiyuan_phone
+  -String feizhiyuan_id_number
+  -String feizhiyuan_photo
+  -Integer sex_types
+  -String feizhiyuan_email
+  -Timestamp create_time
+}
+
+' 活动相关实体
+class Zhihuodong {
+  -Integer id
+  -Integer zhiyuanzhe_id
+  -String zhihuodong_name
+  -String zhihuodong_uuid_number
+  -String zhihuodong_photo
+  -String zhihuodong_address
+  -Integer zhihuodong_types
+  -Integer zhihuodong_kucun_number
+  -String zhihuodong_tiaojian
+  -String zhihuodong_content
+  -Integer zhihuodong_delete
+  -Timestamp insert_time
+  -Timestamp create_time
+}
+
+class ZhihuodongYuyue {
+  -Integer id
+  -String zhihuodong_yuyue_uuid_number
+  -Integer zhihuodong_id
+  -Integer zhiyuanzhe_id
+  -String zhihuodong_yuyue_text
+  -Integer zhihuodong_yuyue_yesno_types
+  -String zhihuodong_yuyue_yesno_text
+  -Timestamp zhihuodong_yuyue_shenhe_time
+  -Timestamp insert_time
+  -Timestamp create_time
+}
+
+class Feihuodong {
+  -Integer id
+  -Integer feizhiyuan_id
+  -String feihuodong_name
+  -String feihuodong_uuid_number
+  -String feihuodong_photo
+  -String feihuodong_address
+  -Integer feihuodong_types
+  -Integer feihuodong_kucun_number
+  -String feihuodong_tiaojian
+  -String feihuodong_content
+  -Integer feihuodong_delete
+  -Timestamp insert_time
+  -Timestamp create_time
+}
+
+class FeihuodongYuyue {
+  -Integer id
+  -String feihuodong_yuyue_uuid_number
+  -Integer feihuodong_id
+  -Integer zhiyuanzhe_id
+  -String feihuodong_yuyue_text
+  -Integer feihuodong_yuyue_yesno_types
+  -String feihuodong_yuyue_yesno_text
+  -Timestamp feihuodong_yuyue_shenhe_time
+  -Timestamp insert_time
+  -Timestamp create_time
+}
+
+' 交互相关实体
+class Forum {
+  -Integer id
+  -String forum_name
+  -Integer zhiyuanzhe_id
+  -Integer feizhiyuan_id
+  -Integer users_id
+  -String forum_content
+  -Integer super_ids
+  -Integer forum_state_types
+  -Timestamp insert_time
+  -Timestamp update_time
+  -Timestamp create_time
+}
+
+class Gonggao {
+  -Integer id
+  -String gonggao_name
+  -String gonggao_photo
+  -Integer gonggao_types
+  -Timestamp insert_time
+  -String gonggao_content
+  -Timestamp create_time
+}
+
+class Chat {
+  -Integer id
+  -Integer zhiyuanzhe_id
+  -String chat_issue
+  -Timestamp issue_time
+  -String chat_reply
+  -Timestamp reply_time
+  -Integer zhuangtai_types
+  -Integer chat_types
+  -Timestamp insert_time
+}
+
+class ZhiyuanzheLiuyan {
+  -Integer id
+  -Integer feizhiyuan_id
+  -Integer zhiyuanzhe_id
+  -String zhiyuanzhe_liuyan_text
+  -Timestamp insert_time
+  -String reply_text
+  -Timestamp update_time
+  -Timestamp create_time
+}
+
+' 字典表
+class Dictionary {
+  -Long id
+  -String dic_code
+  -String dic_name
+  -Integer code_index
+  -String index_name
+  -Integer super_id
+  -String beizhu
+  -Timestamp create_time
+}
+
+' 配置表
+class Config {
+  -Long id
+  -String name
+  -String value
+}
+
+' 定义关系
+Zhiyuanzhe "1" -- "*" Zhihuodong : 发布
+Zhiyuanzhe "1" -- "*" ZhihuodongYuyue : 报名
+Feizhiyuan "1" -- "*" Feihuodong : 发布
+Zhiyuanzhe "1" -- "*" FeihuodongYuyue : 报名
+
+Forum "*" -- "1" Zhiyuanzhe : 发布
+Forum "*" -- "1" Feizhiyuan : 发布
+Forum "*" -- "1" Users : 发布
+
+Chat "*" -- "1" Zhiyuanzhe : 提问
+
+ZhiyuanzheLiuyan "*" -- "1" Zhiyuanzhe : 接收
+ZhiyuanzheLiuyan "*" -- "1" Feizhiyuan : 发送
+
+Zhihuodong "1" -- "*" ZhihuodongYuyue : 包含
+Feihuodong "1" -- "*" FeihuodongYuyue : 包含
+
+@enduml 

@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "Login Page" as LP
+participant "UsersController" as UC
+participant "Token Service" as TS
+database "Users Table" as UT
+database "Token Table" as TT
+
+User -> LP: 输入用户名密码
+LP -> UC: 提交登录请求
+UC -> UT: 验证用户信息
+UT --> UC: 返回用户数据
+UC -> TS: 生成Token
+TS -> TT: 保存Token信息
+TT --> TS: 确认保存
+TS --> UC: 返回Token
+UC --> LP: 返回登录结果
+LP --> User: 显示登录状态
+@enduml 

@@ -1,0 +1,19 @@
+@startuml
+actor Admin
+participant "Activity Page" as AP
+participant "ZhihuodongController" as ZC
+participant "FileController" as FC
+database "Zhihuodong Table" as ZT
+database "File Storage" as FS
+
+Admin -> AP: 创建新活动
+AP -> ZC: 提交活动信息
+ZC -> FC: 上传活动图片
+FC -> FS: 保存图片
+FS --> FC: 返回图片路径
+FC --> ZC: 返回文件信息
+ZC -> ZT: 保存活动数据
+ZT --> ZC: 确认保存
+ZC --> AP: 返回操作结果
+AP --> Admin: 显示发布状态
+@enduml 

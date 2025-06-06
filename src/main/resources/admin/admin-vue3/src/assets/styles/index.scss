@@ -1,0 +1,80 @@
+// 全局样式
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+#app {
+  height: 100%;
+}
+
+// Element Plus 样式覆盖
+.el-upload {
+  --el-upload-dragger-bg-color: var(--el-fill-color-blank);
+  --el-upload-dragger-border: 1px dashed var(--el-border-color);
+  --el-upload-dragger-border-color: var(--el-border-color-darker);
+  --el-upload-dragger-border-hover-color: var(--el-color-primary);
+  --el-upload-dragger-icon-size: 67px;
+  --el-upload-dragger-text-color: var(--el-text-color-regular);
+  --el-upload-dragger-text-font-size: 14px;
+  --el-upload-dragger-text-padding-top: 10px;
+}
+
+.el-upload-dragger {
+  width: 100%;
+  height: 100%;
+  background-color: var(--el-upload-dragger-bg-color);
+  border: var(--el-upload-dragger-border);
+  border-radius: 6px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.el-upload-dragger:hover {
+  border-color: var(--el-upload-dragger-border-hover-color);
+}
+
+.el-upload-dragger.is-dragover {
+  background-color: var(--el-color-primary-light-9);
+  border: 2px dashed var(--el-color-primary);
+}
+
+// 自定义样式
+.page-container {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: calc(100vh - 60px);
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+// 响应式布局
+@media screen and (max-width: 768px) {
+  .page-container {
+    padding: 10px;
+  }
+  
+  .form-container,
+  .table-container {
+    padding: 15px;
+  }
+} 

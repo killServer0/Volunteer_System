@@ -1,0 +1,19 @@
+@startuml
+actor Admin
+participant "Announcement Page" as AP
+participant "GonggaoController" as GC
+participant "FileController" as FC
+database "Gonggao Table" as GT
+database "File Storage" as FS
+
+Admin -> AP: 创建新公告
+AP -> GC: 提交公告信息
+GC -> FC: 上传公告图片
+FC -> FS: 保存图片
+FS --> FC: 返回图片路径
+FC --> GC: 返回文件信息
+GC -> GT: 保存公告数据
+GT --> GC: 确认保存
+GC --> AP: 返回操作结果
+AP --> Admin: 显示发布状态
+@enduml 

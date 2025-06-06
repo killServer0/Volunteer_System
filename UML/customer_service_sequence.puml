@@ -1,0 +1,29 @@
+@startuml
+actor User
+actor Admin
+participant "Chat Page" as CP
+participant "ChatController" as CC
+database "Chat Table" as CT
+
+User -> CP: 发送问题
+CP -> CC: 提交问题内容
+CC -> CT: 保存问题记录
+CT --> CC: 确认保存
+CC --> CP: 返回发送状态
+CP --> User: 显示发送状态
+
+Admin -> CP: 查看问题列表
+CP -> CC: 获取问题数据
+CC -> CT: 查询问题记录
+CT --> CC: 返回问题数据
+CC --> CP: 返回问题列表
+CP --> Admin: 显示问题列表
+
+Admin -> CP: 回复问题
+CP -> CC: 提交回复内容
+CC -> CT: 更新聊天记录
+CT --> CC: 确认更新
+CC --> CP: 返回回复状态
+CP --> Admin: 显示回复状态
+CP --> User: 显示新回复
+@enduml 

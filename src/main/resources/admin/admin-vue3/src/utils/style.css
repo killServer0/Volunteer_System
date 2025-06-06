@@ -1,0 +1,131 @@
+/* 全局样式 */
+:root {
+  --primary-color: #409EFF;
+  --success-color: #67C23A;
+  --warning-color: #E6A23C;
+  --danger-color: #F56C6C;
+  --info-color: #909399;
+  --text-color: #303133;
+  --text-color-secondary: #606266;
+  --border-color: #DCDFE6;
+  --border-color-light: #E4E7ED;
+  --background-color: #F5F7FA;
+}
+
+/* 布局样式 */
+.app-container {
+  padding: 20px;
+}
+
+.page-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 表单样式 */
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* 表格样式 */
+.table-container {
+  margin-top: 20px;
+}
+
+.table-footer {
+  margin-top: 20px;
+  text-align: right;
+}
+
+/* 卡片样式 */
+.card-container {
+  margin-bottom: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 按钮样式 */
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* 标签样式 */
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 搜索样式 */
+.search-container {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 弹窗样式 */
+.dialog-footer {
+  text-align: right;
+  margin-top: 20px;
+}
+
+/* 上传样式 */
+.upload-container {
+  margin: 20px 0;
+}
+
+.upload-tip {
+  font-size: 12px;
+  color: var(--text-color-secondary);
+  margin-top: 5px;
+}
+
+/* 打印样式 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-container {
+    padding: 20px;
+  }
+  
+  .print-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .print-table th,
+  .print-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .print-table th {
+    background-color: #f5f5f5;
+  }
+} 

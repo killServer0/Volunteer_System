@@ -1,0 +1,108 @@
+@startuml
+!define ENTITY(name,desc) class name as "desc" << (E,#FFAAAA) >>
+!define RELATION(name,desc) class name as "desc" << (R,#88CCFF) >>
+
+' 定义实体
+ENTITY(Users, "管理员")
+ENTITY(Zhiyuanzhe, "志愿者")
+ENTITY(Feizhiyuan, "游客")
+ENTITY(Zhihuodong, "志愿者活动")
+ENTITY(ZhihuodongYuyue, "志愿者活动报名")
+ENTITY(Feihuodong, "社区活动")
+ENTITY(FeihuodongYuyue, "社区活动报名")
+ENTITY(Forum, "论坛")
+ENTITY(Gonggao, "公告")
+ENTITY(Chat, "客服聊天")
+ENTITY(ZhiyuanzheLiuyan, "志愿者留言")
+
+' 定义实体属性
+Users : + id
+Users : username
+Users : password
+Users : role
+Users : addtime
+
+Zhiyuanzhe : + id
+Zhiyuanzhe : username
+Zhiyuanzhe : password
+Zhiyuanzhe : zhiyuanzhe_name
+Zhiyuanzhe : zhiyuanzhe_phone
+Zhiyuanzhe : zhiyuanzhe_id_number
+Zhiyuanzhe : zhiyuanzhe_photo
+Zhiyuanzhe : sex_types
+Zhiyuanzhe : zhiyuanzhe_email
+Zhiyuanzhe : create_time
+
+Feizhiyuan : + id
+Feizhiyuan : username
+Feizhiyuan : password
+Feizhiyuan : feizhiyuan_name
+Feizhiyuan : feizhiyuan_phone
+Feizhiyuan : feizhiyuan_id_number
+Feizhiyuan : feizhiyuan_photo
+Feizhiyuan : sex_types
+Feizhiyuan : feizhiyuan_email
+Feizhiyuan : create_time
+
+Zhihuodong : + id
+Zhihuodong : zhihuodong_name
+Zhihuodong : zhihuodong_uuid_number
+Zhihuodong : zhihuodong_photo
+Zhihuodong : zhihuodong_address
+Zhihuodong : zhihuodong_types
+Zhihuodong : zhihuodong_kucun_number
+Zhihuodong : zhihuodong_content
+Zhihuodong : create_time
+
+ZhihuodongYuyue : + id
+ZhihuodongYuyue : zhihuodong_yuyue_uuid_number
+ZhihuodongYuyue : zhihuodong_yuyue_text
+ZhihuodongYuyue : zhihuodong_yuyue_yesno_types
+ZhihuodongYuyue : zhihuodong_yuyue_yesno_text
+ZhihuodongYuyue : create_time
+
+Forum : + id
+Forum : forum_name
+Forum : forum_content
+Forum : forum_state_types
+Forum : super_ids
+Forum : create_time
+
+Gonggao : + id
+Gonggao : gonggao_name
+Gonggao : gonggao_photo
+Gonggao : gonggao_types
+Gonggao : gonggao_content
+Gonggao : create_time
+
+Chat : + id
+Chat : chat_issue
+Chat : chat_reply
+Chat : zhuangtai_types
+Chat : chat_types
+Chat : create_time
+
+ZhiyuanzheLiuyan : + id
+ZhiyuanzheLiuyan : zhiyuanzhe_liuyan_text
+ZhiyuanzheLiuyan : reply_text
+ZhiyuanzheLiuyan : create_time
+
+' 定义关系
+Zhiyuanzhe "1" -- "n" Zhihuodong : 发布
+Zhiyuanzhe "1" -- "n" ZhihuodongYuyue : 报名
+Feizhiyuan "1" -- "n" Feihuodong : 发布
+Zhiyuanzhe "1" -- "n" FeihuodongYuyue : 报名
+
+Forum "n" -- "1" Zhiyuanzhe : 发布
+Forum "n" -- "1" Feizhiyuan : 发布
+Forum "n" -- "1" Users : 发布
+
+Chat "n" -- "1" Zhiyuanzhe : 提问
+
+ZhiyuanzheLiuyan "n" -- "1" Zhiyuanzhe : 接收
+ZhiyuanzheLiuyan "n" -- "1" Feizhiyuan : 发送
+
+Zhihuodong "1" -- "n" ZhihuodongYuyue : 包含
+Feihuodong "1" -- "n" FeihuodongYuyue : 包含
+
+@enduml 

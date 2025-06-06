@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>志愿者活动报名详情</title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../xznstatic/css/common.css"/>
+    <link rel="stylesheet" href="../../xznstatic/css/style.css"/>
+    <link rel="stylesheet" href="../../css/theme.css"/>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../xznstatic/css/element.min.css">
+    <link rel="stylesheet" href="../../xznstatic/css/bootstrap.min.css" />
+</head>
+<style>
+    .center-container {
+        width: 1200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        display: flex;
+        margin-bottom: 20px;
+    }
+    .left-container {
+        border: 2px dotted #EEEEEE;
+        width: 200px;
+        padding-top: 20px;
+    }
+    .right-container {
+        flex: 1;
+        border: 2px dotted #EEEEEE;
+        background: #FFFFFF;
+        text-align: left;
+        padding: 20px;
+        padding-top: 40px;
+    }
+    .detail-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .detail-item {
+        margin-bottom: 20px;
+    }
+    .detail-item-label {
+        display: inline-block;
+        width: 120px;
+        font-weight: bold;
+    }
+    .detail-item-content {
+        display: inline-block;
+        padding-left: 10px;
+    }
+    .back-btn {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .el-tag {
+        margin-right: 10px;
+    }
+    .photo-container {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .photo-container img {
+        max-width: 300px;
+        border-radius: 5px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    }
+</style>
+<body>
+<div id="app">
+    <!-- 标题 -->
+    <div class="index-title sub_backgroundColor" :style='{"padding":"10px","boxShadow":"0 0 2px rgba(160, 67, 26, 1)","margin":"10px auto","borderColor":"rgba(0,0,0,.3)","color":"rgba(255, 255, 255, 1)","borderRadius":"4px","borderWidth":"0","fontSize":"20px","borderStyle":"solid","height":"auto"}'>
+        <span>USER / ORDER</span><span>志愿者活动报名详情</span>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="center-container">
+        <!-- 个人中心菜单 config.js-->
+        <div class="left-container" :style='{"backgroundColor":"#fff","padding":"0","boxShadow":"0px 0px 1px rgba(181, 181, 181, 1)","margin":"0","borderColor":"rgba(191, 191, 191, 1)","backgroundColor":"rgba(255, 255, 255, 1)","borderRadius":"0","borderWidth":"0 0 1px 0","width":"20%","borderStyle":"solid"}'>
+            <ul class="layui-nav layui-nav-tree">
+                <li v-for="(item,index) in centerMenu" v-bind:key="index" class="layui-nav-item" :class="item.url=='../zhihuodongYuyue/list.html'?'layui-this':''">
+                    <a :href="'javascript:jump(\''+item.url+'\')'">{{item.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 详情区域 -->
+        <div class="right-container sub_borderColor" style="overflow: auto" :style='{"padding":"20px","boxShadow":"0px rgba(255,0,0,.8)","margin":"0","backgroundColor":"#fff","borderRadius":"0","borderWidth":"1px","borderStyle":"solid","width":"80%"}'>
+            <div class="detail-title">志愿者活动报名详情</div>
+            
+            <div class="photo-container" v-if="detail.zhihuodongPhoto">
+                <img :src="detail.zhihuodongPhoto?baseUrl+detail.zhihuodongPhoto:''" alt="活动照片" onerror="this.src='../../img/no-image.png';this.onerror=null;"/>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">活动名称：</span>
+                <span class="detail-item-content">{{detail.zhihuodongName}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">活动类型：</span>
+                <span class="detail-item-content">{{detail.zhihuodongValue}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">活动地点：</span>
+                <span class="detail-item-content">{{detail.zhihuodongAddress}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">报名编号：</span>
+                <span class="detail-item-content">{{detail.zhihuodongYuyueUuidNumber}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">报名理由：</span>
+                <span class="detail-item-content">{{detail.zhihuodongYuyueText}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">报名状态：</span>
+                <span class="detail-item-content">
+                    <el-tag :type="detail.zhihuodongYuyueYesnoTypes === 1 ? 'warning' : 'success'">
+                        {{detail.zhihuodongYuyueYesnoValue}}
+                    </el-tag>
+                </span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">审核回复：</span>
+                <span class="detail-item-content">{{detail.zhihuodongYuyueYesnoText || '-'}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">审核时间：</span>
+                <span class="detail-item-content">{{detail.zhihuodongYuyueShenheTime || '-'}}</span>
+            </div>
+            
+            <div class="detail-item">
+                <span class="detail-item-label">报名时间：</span>
+                <span class="detail-item-content">{{detail.insertTime}}</span>
+            </div>
+            
+            <div class="back-btn">
+                <el-button type="primary" @click="jump('../zhihuodongYuyue/list.html')">返回列表</el-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../xznstatic/js/jquery-1.11.3.min.js"></script>
+<script src="../../xznstatic/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../layui/layui.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../xznstatic/js/element.min.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../modules/config.js"></script>
+<script src="../../js/utils.js"></script>
+
+<script type="text/javascript">
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            userId: localStorage.getItem("userid"),
+            sessionTable: localStorage.getItem("userTable"),
+            role: localStorage.getItem("role"),
+            centerMenu: centerMenu,
+            baseUrl: "",
+            id: '',
+            detail: {}
+        },
+        methods: {
+            jump(url) {
+                jump(url);
+            },
+            fetchDetail() {
+                layui.http.request('zhihuodongYuyue/info/' + this.id, 'get', {}, (res) => {
+                    if (res.code == 0) {
+                        this.detail = res.data;
+                    } else {
+                        layui.layer.msg(res.msg, {
+                            time: 2000,
+                            icon: 5
+                        });
+                    }
+                });
+            }
+        }
+    });
+
+    layui.use(['layer', 'element', 'http', 'jquery'], function() {
+        var layer = layui.layer;
+        var element = layui.element;
+        var http = layui.http;
+        var jquery = layui.jquery;
+        
+        vue.baseUrl = http.baseurl;
+        
+        // 获取URL中的ID参数
+        var id = http.getParam('id');
+        vue.id = id;
+        
+        // 设置本地存储的返回URL
+        localStorage.setItem("goUtl", "./pages/zhihuodongYuyue/info.html?id=" + id);
+        
+        // 获取用户信息
+        let table = localStorage.getItem("userTable");
+        if (table) {
+            http.request(table + "/session", 'get', {}, function(data) {
+                if (data.data) {
+                    vue.user = data.data;
+                }
+            });
+        }
+        
+        // 获取详情数据
+        vue.fetchDetail();
+    });
+</script>
+</body>
+</html> 

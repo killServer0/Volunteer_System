@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{c as s,a as t,o as a}from"./index-rJx6E4Nh.js";const r={class:"home"},_={__name:"Home",setup(c){return(m,e)=>(a(),s("div",r,e[0]||(e[0]=[t("h1",null,"社区志愿者管理系统",-1)])))}},l=o(_,[["__scopeId","data-v-22a43959"]]);export{l as default};

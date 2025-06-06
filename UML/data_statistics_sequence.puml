@@ -1,0 +1,39 @@
+@startuml
+actor Admin
+participant "Statistics Page" as SP
+participant "CommonController" as CC
+participant "CommonService" as CS
+participant "CommonDao" as CD
+database "Database" as DB
+
+Admin -> SP: 请求统计数据
+SP -> CC: 调用统计接口
+activate CC
+
+CC -> CS: 调用统计服务
+activate CS
+
+CS -> CD: 执行统计查询
+activate CD
+
+CD -> DB: 执行SQL查询
+DB --> CD: 返回查询结果
+CD --> CS: 返回统计数据
+deactivate CD
+
+CS --> CC: 返回处理结果
+deactivate CS
+
+alt 饼图统计
+    CC -> CC: 处理饼图数据
+else 柱状图统计
+    CC -> CC: 处理柱状图数据
+else 分组统计
+    CC -> CC: 处理分组数据
+end
+
+CC --> SP: 返回统计结果
+deactivate CC
+
+SP --> Admin: 展示统计图表
+@enduml 

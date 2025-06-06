@@ -1,0 +1,63 @@
+@startuml
+!define ENTITY(name,desc) class name as "desc" << (E,#FFAAAA) >>
+!define RELATION(name,desc) class name as "desc" << (R,#88CCFF) >>
+
+' 定义实体
+ENTITY(User, "用户")
+ENTITY(Program, "节目")
+ENTITY(Column, "栏目")
+ENTITY(Region, "区域")
+ENTITY(ProgramCategory, "节目栏目")
+ENTITY(ViewRecord, "节目浏览记录")
+ENTITY(ViewLog, "节目浏览日志")
+ENTITY(ColumnRank, "栏目点播排行")
+
+' 定义实体属性
+User : + 用户ID
+User : 用户名
+User : 密码
+User : 角色类型
+User : 注册时间
+User : 最后登录时间
+
+Program : + 节目ID
+Program : 节目名称
+Program : 节目描述
+Program : 发布时间
+Program : 播放次数
+Program : 评分
+
+Column : + 栏目ID
+Column : 栏目名称
+Column : 栏目描述
+Column : 创建时间
+
+Region : + 区域ID
+Region : 区域名称
+Region : 区域描述
+
+ViewRecord : + 记录ID
+ViewRecord : 浏览时间
+ViewRecord : 浏览时长
+
+ViewLog : + 日志ID
+ViewLog : 访问时间
+ViewLog : IP地址
+
+ColumnRank : + 排行ID
+ColumnRank : 点播次数
+ColumnRank : 统计时间
+
+' 定义关系
+User "1" -- "m" ViewRecord : 产生
+User "1" -- "m" Program : 点播
+
+Program "n" -- "m" Column : 属于
+Program "n" -- "1" Region : 所属
+Program "1" -- "m" ViewRecord : 被浏览
+Program "1" -- "m" ViewLog : 记录
+
+Column "1" -- "m" ColumnRank : 统计
+Column "n" -- "1" ProgramCategory : 分类
+
+@enduml 
